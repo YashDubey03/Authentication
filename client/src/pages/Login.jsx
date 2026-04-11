@@ -13,7 +13,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const { backendUrl, setIsLoggedIn } = useContext(AppContent);
+  const { backendUrl, setIsLoggedIn, getUserData } = useContext(AppContent);
 
   const onSubmitHandler = async (e) => {
     try {
@@ -29,6 +29,7 @@ const Login = () => {
 
         if (data.success) {
           setIsLoggedIn(true);
+          getUserData();
           navigate("/");
         } else {
           toast.error(data.message);
@@ -41,13 +42,14 @@ const Login = () => {
 
         if (data.success) {
           setIsLoggedIn(true);
+          getUserData();
           navigate("/");
         } else {
           toast.error(data.message);
         }
       }
     } catch (error) {
-      toast.error(data.message);
+      toast.error(error.message);
     }
   };
 
